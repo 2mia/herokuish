@@ -68,7 +68,7 @@ func YamlGet(args []string) {
 
 func AssetCat(args []string) {
 	for _, asset := range args {
-		data, err := Asset(asset)
+		data, err := basher.Asset(asset)
 		if err != nil {
 			os.Exit(2)
 		}
@@ -89,5 +89,5 @@ func main() {
 		"include/buildpack.bash",
 		"include/procfile.bash",
 		"include/slug.bash",
-	}, Asset, true)
+	}, basher.Asset, true)
 }
