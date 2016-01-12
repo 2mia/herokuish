@@ -40,7 +40,11 @@ procfile-exec() {
 	procfile-load-env
 	procfile-load-profile
 	cd "$app_path"
-	exec setuidgid "$unprivileged_user" $(eval echo $@)
+	if ( grep "RUN_AS_ROOT=true" /app/.env &>/dev/null ); then
+		exec $(eval echo $@)
+	else
+		exec setuidgid "$unprivileged_user" $(eval echo $@)
+	fi 
 }
 
 procfile-types() {
