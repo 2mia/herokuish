@@ -142,7 +142,9 @@ main() {
 	cmd-export procfile-parse
 
 	case "$SELF" in
-		/start)		procfile-start "$@";;
+		/start)
+					[ -f /app/Procfile.pre ] && /app/Procfile.pre
+					procfile-start "$@";;
 		/exec)		procfile-exec "$@";;
 		/build)		buildpack-build;;
 		*)			cmd-ns "" "$@";
